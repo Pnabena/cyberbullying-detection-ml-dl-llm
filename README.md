@@ -1,3 +1,8 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![NLP](https://img.shields.io/badge/NLP-Text%20Classification-green)
+![Transformers](https://img.shields.io/badge/Transformers-DistilBERT-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 # cyberbullying-detection-ml-dl-llm.github
 Cyberbullying Detection using Machine Learning, Hybrid Deep Learning, and LLM Fine-Tuning
 
