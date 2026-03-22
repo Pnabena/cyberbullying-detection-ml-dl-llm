@@ -96,7 +96,7 @@ This project explores whether:
 | Logistic Regression | 0.81 | 0.81 |
 | SVM | 0.81 | 0.81 |
 | Random Forest | 0.81 | 0.81 |
-| CNN-LSTM | ~0.82 | ~0.82 |
+| CNN-LSTM | 0.82 | 0.82 |
 | DistilBERT | 0.87 | 0.87 |
 | TinyLlama | 0.61 | 0.61 |
 
