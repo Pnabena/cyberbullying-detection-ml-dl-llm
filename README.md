@@ -1,175 +1,258 @@
+# Multiclass Cyberbullying Detection with Machine Learning and Transformer Models
+
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![NLP](https://img.shields.io/badge/NLP-Text%20Classification-green)
+![NLP](https://img.shields.io/badge/NLP-Multiclass%20Text%20Classification-green)
 ![Transformers](https://img.shields.io/badge/Transformers-DistilBERT-orange)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Conference](https://img.shields.io/badge/SMAP%202026-Accepted-purple)
 
-# cyberbullying-detection-ml-dl-llm.github
-Cyberbullying Detection using Machine Learning, Hybrid Deep Learning, and LLM Fine-Tuning
+> Comparative NLP research evaluating classical machine learning, deep learning, transformer and language-model approaches for multiclass cyberbullying detection.
 
-Raw Tweets
-    ↓
-Text Cleaning & Preprocessing
-    ↓
-Tokenization / Embeddings
-    ↓
----------------------------------------
-| ML Models | CNN-LSTM | DistilBERT | TinyLlama |
----------------------------------------
-    ↓
-Evaluation (Accuracy, F1)
-    ↓
-Fairness & Bias Analysis
+## Publication Status
 
-This project investigates cyberbullying detection as a **multi-class natural language processing task**, comparing traditional machine learning, hybrid deep learning, and large language model (LLM) approaches.
+**Accepted for oral presentation and inclusion in the IEEE workshop proceedings at SMAP 2026 — the 21st International Workshop on Smart Media Adaptation, AI & Personalization.**
 
-The study focuses on how different models capture **contextual and nuanced forms of harmful language** across multiple categories, while also examining **fairness and bias in classification performance**.
+**Paper:** *Multiclass Cyberbullying Detection with Machine Learning and Transformer Models*
+
+**Authors:** Oyinkepreye Nabena, Busiyi Fagbamigbe, Alaa Mohasseb, Andreas Kanavos
+
+The final IEEE citation and DOI will be added when the proceedings metadata is available.
 
 ---
 
-## Research Motivation
+## Project Overview
 
-Online platforms face increasing challenges in detecting subtle and context-dependent cyberbullying. Traditional approaches often fail to capture implicit or context-rich abusive language.
+Cyberbullying detection is not simply a binary abusive/not-abusive classification problem. Harmful language can target age, gender, ethnicity, religion and other characteristics, while some messages are ambiguous or difficult to distinguish from non-cyberbullying content.
 
-This project explores whether:
-- Deep learning improves contextual understanding
-- LLMs outperform traditional models in nuanced classification
-- Model performance varies across different bullying categories (fairness)
+This project investigates cyberbullying detection as a **six-class natural language processing task** and compares multiple modelling families:
+
+- Logistic Regression
+- Support Vector Machine
+- Random Forest
+- CNN-LSTM
+- DistilBERT
+- TinyLlama
+
+The study examines both overall predictive performance and **class-level behaviour**, highlighting how aggregate scores can hide important differences between easy and difficult categories.
 
 ---
 
 ## Dataset
 
-- **Source:** Kaggle Cyberbullying Twitter Dataset  
-- **Link:** https://www.kaggle.com/datasets/ashiqnazir/cbtweets  
-- **Type:** Multi-class text dataset  
+**Source:** Cyberbullying Tweets Dataset  
+**Dataset size:** 95,392 tweets
 
-### Class Labels:
+### Classes
+
 - Age
+- Ethnicity
 - Gender
 - Religion
-- Ethnicity
 - Not Cyberbullying
 - Other Cyberbullying
 
 ---
 
-## Methodology
+## Research Questions
 
-### 1. Baseline Machine Learning Models
-- Logistic Regression
-- Support Vector Machine (SVM)
-- Random Forest
+The project explores:
 
-### 2. Deep Learning Model
-- Hybrid **CNN-LSTM architecture**
-  - CNN for feature extraction
-  - LSTM for sequence modelling
-    
-### Transformer Model
-- DistilBERT (fine-tuned for classification)
-
-### 3. Large Language Model
-- Fine-tuned **TinyLlama**
-  - Used for contextual classification of cyberbullying types
+1. How effectively can traditional machine learning models classify different forms of cyberbullying?
+2. Does a hybrid CNN-LSTM architecture improve performance over classical baselines?
+3. How does a fine-tuned transformer model compare with traditional and deep-learning approaches?
+4. Can a compact language model such as TinyLlama generalise effectively across the full multiclass label space?
+5. How much does performance vary between cyberbullying categories?
 
 ---
 
-## Workflow
+## Modelling Pipeline
 
-1. Data cleaning and preprocessing  
-2. Exploratory data analysis (EDA)  
-3. Text vectorisation and feature extraction  
-4. Baseline model training  
-5. CNN-LSTM training  
-6. TinyLlama fine-tuning  
-7. Model evaluation  
-8. Fairness and bias analysis  
+```mermaid
+flowchart TD
+    A[Raw Tweets] --> B[Cleaning & Preprocessing]
+    B --> C1[TF-IDF / Classical Features]
+    B --> C2[Sequence Representation]
+    B --> C3[Transformer Tokenisation]
+    B --> C4[LLM Tokenisation]
+
+    C1 --> D1[Logistic Regression]
+    C1 --> D2[SVM]
+    C1 --> D3[Random Forest]
+
+    C2 --> D4[CNN-LSTM]
+    C3 --> D5[DistilBERT]
+    C4 --> D6[TinyLlama]
+
+    D1 --> E[Multiclass Evaluation]
+    D2 --> E
+    D3 --> E
+    D4 --> E
+    D5 --> E
+    D6 --> E
+
+    E --> F[Accuracy & F1]
+    E --> G[Per-Class Analysis]
+    G --> H[Error / Fairness Discussion]
+```
+
+---
+
+## Models
+
+### Classical Machine Learning
+- Logistic Regression
+- Support Vector Machine
+- Random Forest
+
+### Deep Learning
+- CNN-LSTM
+
+### Transformer
+- DistilBERT
+
+### Large Language Model
+- TinyLlama
 
 ---
 
 ## Results
 
-*(Replace with your actual values)*
+Approximate overall results from the completed experiments are summarised below.
 
-| Model | Accuracy | F1-score (Weighted) |
-|------|----------|---------------------|
-| Logistic Regression | 0.81 | 0.81 |
-| SVM | 0.81 | 0.81 |
-| Random Forest | 0.81 | 0.81 |
-| CNN-LSTM | 0.82 | 0.82 |
-| DistilBERT | 0.87 | 0.87 |
-| TinyLlama | 0.61 | 0.61 |
+| Model | Accuracy | Weighted F1 |
+|---|---:|---:|
+| Logistic Regression | ~0.80 | ~0.80 |
+| SVM | ~0.81 | ~0.81 |
+| Random Forest | ~0.81 | ~0.81 |
+| CNN-LSTM | ~0.82 | ~0.82 |
+| **DistilBERT** | **~0.87** | **~0.87** |
+| TinyLlama | ~0.61 | ~0.61 |
 
-DistilBERT achieved the best overall performance, demonstrating strong contextual understanding and significantly outperforming both traditional machine learning and hybrid deep learning models.
+**DistilBERT achieved the strongest overall performance.**
 
-## Per-Class Performance Insights
+---
 
-- **High-performing classes:** Age, Ethnicity, Religion (F1 ≈ 0.97–0.99)
-  
-- **Moderate:** Gender (F1 ≈ 0.90)
-  
-- **Challenging classes:**
-  - Not Cyberbullying → F1 = 0.66
-  - Other Cyberbullying → F1 = 0.74
+## DistilBERT Class-Level Performance
 
-These results indicate that models perform best when clear lexical patterns exist, but struggle with ambiguous or context-dependent classifications.
+| Class | Approx. F1 |
+|---|---:|
+| Age | ~0.99 |
+| Ethnicity | ~0.98 |
+| Religion | ~0.97 |
+| Gender | ~0.90 |
+| Other Cyberbullying | ~0.73 |
+| Not Cyberbullying | ~0.66 |
+
+The strongest transformer model performed very differently across categories. Categories with clearer recurring linguistic signals were easier to classify, while **Not Cyberbullying** and **Other Cyberbullying** remained substantially harder.
 
 ---
 
 ## Key Findings
 
-- Traditional ML models provide strong baselines but struggle with **context-dependent bullying**
-- DistilBERT significantly outperformed all other models, demonstrating strong contextual understanding of cyberbullying language
-- CNN-LSTM improves **sequence awareness and contextual understanding**
-- TinyLlama achieved moderate overall performance (~0.61), but failed entirely on certain classes, demonstrating that aggregate metrics can mask critical classification failures
-- Performance varies across bullying categories, highlighting **fairness concerns in classification**
+- **DistilBERT produced the strongest overall results**, outperforming the classical baselines and CNN-LSTM.
+- **Aggregate metrics do not tell the full story**. Strong overall accuracy coexisted with substantially weaker performance on ambiguous classes.
+- **Ambiguous categories remain the main challenge**, especially Not Cyberbullying and Other Cyberbullying.
+- **TinyLlama generalised poorly across parts of the label space**, showing that an LLM does not automatically outperform a task-specific transformer.
+- **Per-class evaluation is essential** for moderation-related NLP because overall metrics can conceal severe class-level failures.
 
 ---
 
-## Fairness & Bias Analysis
+## Fairness and Model Behaviour
 
-This project evaluates how models perform across different bullying types, revealing:
+The project includes class-level analysis because cyberbullying categories are not equally difficult to recognise.
 
-DistilBERT achieved near-perfect performance on categories with explicit linguistic patterns (e.g., age, religion, ethnicity), while performance dropped significantly for more ambiguous classes such as "Not Cyberbullying" (F1 = 0.66) and "Other Cyberbullying" (F1 = 0.74).
+The observed variation does **not** by itself establish demographic fairness or unfairness. Instead, it shows that the models have different error profiles across the dataset's bullying categories.
 
-- Certain categories (e.g., implicit bullying) are harder to detect
-- TinyLlama failed to detect certain classes (F1 = 0.00 for "Other Cyberbullying" and "Not Cyberbullying"), indicating poor generalisation across the full label space.
+Important observations include:
+
+- categories with strong lexical markers were easier to classify
+- ambiguous categories produced significantly lower F1 scores
+- TinyLlama failed to recover some classes effectively
+- aggregate metrics alone can conceal severe class-level weaknesses
+
+---
+
+## Technology Stack
+
+- Python
+- Pandas
+- NumPy
+- scikit-learn
+- TensorFlow / Keras
+- Hugging Face Transformers
+- DistilBERT
+- TinyLlama
+- Jupyter Notebook
+- Matplotlib
 
 ---
 
 ## Repository Structure
 
-notebooks/ → Model development and experiments
-src/ → Reusable scripts
-models/ → Trained models
-results/ → Evaluation outputs and visualisations
-data/ → Dataset references and preprocessing
-docs/ → Project summary or research notes
+```text
+cyberbullying-detection-ml-dl-llm/
+├── Cyberbullying_Detection.ipynb
+├── cyberbullying_tweets.csv
+└── README.md
+```
+
+`Cyberbullying_Detection.ipynb` contains the experimental workflow, model training and evaluation.
 
 ---
 
-## Technologies Used
+## Reproducing the Project
 
-- Python  
-- pandas, numpy  
-- scikit-learn  
-- TensorFlow / PyTorch *(update based on your notebook)*  
-- HuggingFace Transformers  
-- matplotlib / seaborn  
+```bash
+git clone https://github.com/Pnabena/cyberbullying-detection-ml-dl-llm.git
+cd cyberbullying-detection-ml-dl-llm
+jupyter notebook Cyberbullying_Detection.ipynb
+```
+
+> Transformer and language-model experiments may require GPU resources.
+
+---
+
+## Limitations
+
+- The study evaluates a single benchmark dataset and should not be assumed to generalise unchanged to other platforms or communities.
+- Cyberbullying language evolves over time.
+- Dataset labels may not capture every contextual or culturally specific interpretation of harmful language.
+- Strong aggregate metrics can hide weak performance on individual classes.
+- The class-level analysis describes model behaviour on this dataset and should not be interpreted as a complete fairness audit.
 
 ---
 
 ## Future Work
 
-- Extend to **multilingual cyberbullying detection**
-- Explore **explainability for LLM predictions**
-- Apply methods to **real-world conversational systems**
-- Improve fairness-aware training techniques
+Potential extensions include:
+
+- multilingual cyberbullying detection
+- culturally aware language modelling
+- stronger explainability methods
+- fairness-aware training and evaluation
+- conversational/context-aware cyberbullying detection
+- deployment-oriented moderation pipelines
+- evaluation on newer and cross-platform datasets
 
 ---
 
-## Research Direction
+## Publication
 
-This project forms part of a broader research interest in:
+**Oyinkepreye Nabena, Busiyi Fagbamigbe, Alaa Mohasseb, Andreas Kanavos.**  
+*Multiclass Cyberbullying Detection with Machine Learning and Transformer Models.*  
+Accepted for oral presentation and inclusion in the IEEE workshop proceedings at **SMAP 2026, the 21st International Workshop on Smart Media Adaptation, AI & Personalization**.
 
-> **Natural Language Processing for understanding complex, real-world, and culturally nuanced language across domains such as social media, healthcare, and human interaction systems.**
+**IEEE citation / DOI:** To be added when available.
+
+---
+
+## Author
+
+**Preye Nabena**
+
+Applied AI & Machine Learning Engineer  
+MSc Artificial Intelligence & Machine Learning, University of Portsmouth  
+BSc Statistics
+
+- GitHub: https://github.com/Pnabena
+- LinkedIn: https://linkedin.com/in/preye-nabena
+- Portfolio: https://preye.vercel.app/
